@@ -6,9 +6,28 @@ export const getTodosASync = createAsyncThunk(
   'todos/getTodosAsync',
   async () => {
     const res = await fetch('http://localhost:7000/todos');
+
     if (res.ok) {
       const todos = await res.json();
       return { todos };
+    }
+  }
+)
+; 
+export const addTodosASync = createAsyncThunk(
+  'todos/addTodosAsync',
+  async (payload) => {
+    const res = await fetch('http://localhost:7000/todos', {
+      method: 'POST' ,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title: payload.title }),
+    });
+
+    if (res.ok) {
+      const todo = await res.json();
+      return { todo };
     }
   }
 ); 
@@ -57,7 +76,10 @@ export const todoSlice = createSlice({
     // creating a fulfilled method as a property on the function object that runs on fulfillment of the API call
     // the Thunk API call appends the payload with the returned value and passes that to the reducer
     [getTodosASync.fulfilled]: (state, action) => {
-      return action.payload.todos
+      return action.payload.todos;
+    },
+    [addTodosASync.fulfilled]: (state, action) => {
+      state.push(action.payload.todo);
     },
   },
 
