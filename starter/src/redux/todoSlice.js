@@ -1,4 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+// import Thunk
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+// create an api fetch request for use in a state change
+export const getTodosASync = createAsyncThunk(
+  'todos/getTodosAsync',
+  async () => {
+    const res = await fetch('http://localhost:7000/todos');
+    if (res.ok) {
+      const todos = await res.json();
+      return { todos };
+    }
+  }
+); 
 
 export const todoSlice = createSlice({
   name: 'todos',
@@ -38,10 +51,16 @@ export const todoSlice = createSlice({
       // -- filter is a cleaner implementation
       return initialState.filter(todo => todo.id !== action.payload.id);
     },
-
-    //
-
   },
+  // add a extraReducers object to work with Thunk
+  extraReducers: {
+    // creating a fulfilled method as a property on the function object that runs on fulfillment of the API call
+    // the Thunk API call appends the payload with the returned value and passes that to the reducer
+    [getTodosASync.fulfilled]: (state, action) => {
+      return action.payload.todos
+    },
+  },
+
 });
 
 export const { addTodo, toggleComplete, deleteItem } = todoSlice.actions;  // action type
