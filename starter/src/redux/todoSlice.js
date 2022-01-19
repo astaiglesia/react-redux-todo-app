@@ -12,10 +12,10 @@ export const getTodosASync = createAsyncThunk(
       return { todos };
     }
   }
-)
-; 
+);
+ 
 export const addTodosASync = createAsyncThunk(
-  'todos/addTodosAsync',
+  'todos/addTodoAsync',
   async (payload) => {
     const res = await fetch('http://localhost:7000/todos', {
       method: 'POST' ,
@@ -27,6 +27,26 @@ export const addTodosASync = createAsyncThunk(
 
     if (res.ok) {
       const todo = await res.json();
+      return { todo };
+    }
+  }
+); 
+ 
+export const toggleCompleteASync = createAsyncThunk(
+  'todos/completeTodoAsync',
+  async (payload) => {
+    console.log('payload id', payload.id)
+    const res = await fetch(`http://localhost:7000/todos/${payload.id}`, {    // id passed as a route param
+      method: 'PATCH' ,                                              // PATCH b/c updating part of an object
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ completed: payload.completed }),
+    });
+
+    if (res.ok) {
+      const todo = await res.json();
+      console.log('todo', todo)
       return { todo };
     }
   }
@@ -80,6 +100,10 @@ export const todoSlice = createSlice({
     },
     [addTodosASync.fulfilled]: (state, action) => {
       state.push(action.payload.todo);
+    },
+    [toggleCompleteASync.fulfilled]: (state, action) => {
+      const index = state.findIndex(todo => todo.id === action.payload.todo.id);
+      state[index].completed = action.payload.todo.completed;
     },
   },
 

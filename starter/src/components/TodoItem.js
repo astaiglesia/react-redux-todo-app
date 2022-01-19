@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleComplete } from '../redux/todoSlice';
-import { deleteItem } from '../redux/todoSlice';
+import { toggleCompleteASync, deleteItem } from '../redux/todoSlice';
+
 
 const TodoItem = ({ id, title, completed }) => {
 	const dispatch = useDispatch();
 
 	const handleCheckboxClick = () => {
 		dispatch(
-			toggleComplete({ id, completed: !completed }) 	
+			toggleCompleteASync({ id, completed: !completed }) 	
 			// because this is toggle logic, triggering can simply dispatch a payload with the opposite state
 		);
 	};
