@@ -107,4 +107,10 @@ e.g. we want the TodoList component to render based on the application's state s
 ### Create the reducer & action
 here we will be updating existing state (completed property as defined in the addToDo reducer)
 - add reducer to createSlice argument
-- add action to the event handler
+  - export the action type
+- dispatch the action 
+  - setup window event to trigger the action
+  - in the action triggering component >
+    - import useDispatch() and action type
+      - assign a call to useDispatch
+    - provide event handler logic that dispatches the action with payload
