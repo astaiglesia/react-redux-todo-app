@@ -3,6 +3,6 @@ import addTodoReducer from './todoSlice';
 
 export default configureStore({
   reducer: {
-    addTodos: addTodoReducer,
+    todos: addTodoReducer,
   },
 });

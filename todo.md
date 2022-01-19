@@ -48,7 +48,14 @@ ReactDOM.render(
 
 ```
 
-### creating a slice
+<BR>
+<hr>
+
+## ADD TO-DO ITEMS
+<hr>
+<BR>
+
+### create a slice
 slice stores a piece, aka slice, of data and is bundled with all necessary data and functionality to change and retrieve the data
 - in the redux folder create new file - todoSlice.js
   - `import createSlice` from the redux toolkit
@@ -86,3 +93,16 @@ e.g. we want the TodoList component to render based on the application's state s
 - in the component file >
   - import the useSelector hook from react-redux library
     - useSelector accepts a function and returns the data based on that function
+      - here useSelector will return an array of the todo's stored in state 
+      - reminder **the state's name was defined in the store's reducer object -> { stateNameAsKey: reducerToUse}**
+    - map the array in the returned component
+  
+<BR>
+<hr>
+
+## Mark a todo as complete
+<hr>
+<BR>
+
+### Create the reducer & action
+here we will be updating existing state ()
