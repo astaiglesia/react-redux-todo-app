@@ -114,3 +114,12 @@ here we will be updating existing state (completed property as defined in the ad
     - import useDispatch() and action type
       - assign a call to useDispatch
     - provide event handler logic that dispatches the action with payload
+
+
+
+### Updating the item count component
+// 
+// import useSelector and create a function that calculates the total 
+// retrieve the todos list
+// filter out the completed items
+// access the length property
