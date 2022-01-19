@@ -29,9 +29,21 @@ export const todoSlice = createSlice({
     },
 
     // --- handles delete of item
+    deleteItem: (initialState, action) => {
+      // find the index of the clicked item
+      // pop the item fom the initial state array
+      // remember to pass the id in the payload of the handler function
+      // const index = initialState.findIndex(todo => todo.id === action.payload.id);
+      // initialState.splice(index, 1)
+      // -- filter is a cleaner implementation
+      return initialState.filter(todo => todo.id !== action.payload.id);
+    },
+
+    //
+
   },
 });
 
-export const { addTodo, toggleComplete } = todoSlice.actions;  // action type
+export const { addTodo, toggleComplete, deleteItem } = todoSlice.actions;  // action type
 
 export default todoSlice.reducer;              // reducer object
