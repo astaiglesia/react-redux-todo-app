@@ -1,5 +1,5 @@
 # REACT + REDUX TODO APP
-
+while implementation of redux should be planned alongside the UI, create the React UI scaffolding first
 ## THE STORE
 ### create and configure the store
 - create a redux dir
@@ -50,4 +50,16 @@ ReactDOM.render(
 
 ### creating a slice
 slice stores a piece, aka slice, of data and is bundled with all necessary data and functionality to change and retrieve the data
-- in the redux folder create 
+- in the redux folder create new file - todoSlice.js
+  - import createSlice from the redux toolkit
+  - export an evaluated result of createSlice()
+    - pass in an object argument with the foloowing properties:
+      * name: string
+      * initial state: object
+      * reducers: object of methods
+**NOTE: when adding reducer property methods to the createSlice argument, under the hood Redux will create action types based on the reducer names**
+  - createSlice() evaluated returns include an actions property object containing the action types
+    * export the named action types
+  - export default the reducer property of the createSlice evaluated return
+
+  ### add reducers to the store
