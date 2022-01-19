@@ -1,11 +1,32 @@
 import React, { useState } from 'react';
+// import useDispatch hook 
+import { useDispatch } from 'react-redux';
+// import the action 
+import { addTodo } from '../redux/todoSlice';
+
 
 const AddTodoForm = () => {
+	// useState hook allows us to track state in a function component
+	// useState accepts an initial state and returns two values:
+		// The current state
+		// A function that updates the state
 	const [value, setValue] = useState('');
+	// assign a reference to the dispatch function -> use to dispatch actions as needed 
+	const dispatch = useDispatch();
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		console.log('user entered: ' + value);
+
+		// provide onclick functionality to the form submit button 
+			// call to dispatch passing in the new value to dispatch as the action payload
+			// reminder - actions accept an object that gets mapped to action.payload
+		if (value) {
+			dispatch(
+				addTodo({
+				title: value,
+				})
+			)
+		};
 	};
 
 	return (

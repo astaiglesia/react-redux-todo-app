@@ -4,8 +4,8 @@ while implementation of redux should be planned alongside the UI, create the Rea
 ### create and configure the store
 - create a redux dir
 - create store.js
-  - import configureStore from redux toolkit
-  - export the evaluated result of configureStore invoked with an argument of an object with a reducer property with a value of an empty object
+  - `import configureStore` from redux toolkit
+  - `export the evaluated result of configureStore` invoked with an argument of an object with a reducer property with a value of an empty object
   - configureStore() creates a store for holding our state and combining our reducers and includes built-in middleware
     - we will pass in our reducers into the object argument
 
@@ -51,15 +51,38 @@ ReactDOM.render(
 ### creating a slice
 slice stores a piece, aka slice, of data and is bundled with all necessary data and functionality to change and retrieve the data
 - in the redux folder create new file - todoSlice.js
-  - import createSlice from the redux toolkit
-  - export an evaluated result of createSlice()
+  - `import createSlice` from the redux toolkit
+  - `export the evaluated result` of createSlice()
     - pass in an object argument with the foloowing properties:
       * name: string
       * initial state: object
       * reducers: object of methods
 **NOTE: when adding reducer property methods to the createSlice argument, under the hood Redux will create action types based on the reducer names**
   - createSlice() evaluated returns include an actions property object containing the action types
-    * export the named action types
-  - export default the reducer property of the createSlice evaluated return
+    * `export the action types`
+  - `export default the reducer property` of the createSlice evaluated return
 
-  ### add reducers to the store
+### add reducers to the store
+- `import the reducer` to store.js
+  - `add the reducer` object in the configureStore argument
+
+### dispatch the action and payload to the Redux store
+we want to dispatch the action whenever the target user event occurs
+...in this case we want to dispatch the addTodo action onClick of the submit button
+
+- dispatch the action within the associated component's event handler logic
+  - in AddTodoForm.js > 
+    - we have a functional component currently managing state with hooks
+    - onSubmit handles synthetic events by logging the value to the console
+    - returns a form with a text input and submit button
+  - **we want to:**
+    - `import useDispatch` hook from react-redux 
+    - `import the action type`
+    - add a `call to useDispatch,` passing in an action type and payload (data reflecting the state  changed)
+
+### retrieving the data from Redux
+now that we've dispatched an action type and payload to the Redux store, we our components that depend on that state to retrieve the updated state and re-render to reflect the changes
+e.g. we want the TodoList component to render based on the application's state stored in Redux
+- in the component file >
+  - import the useSelector hook from react-redux library
+    - useSelector accepts a function and returns the data based on that function
