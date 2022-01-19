@@ -105,4 +105,6 @@ e.g. we want the TodoList component to render based on the application's state s
 <BR>
 
 ### Create the reducer & action
-here we will be updating existing state ()
+here we will be updating existing state (completed property as defined in the addToDo reducer)
+- add reducer to createSlice argument
+- add action to the event handler

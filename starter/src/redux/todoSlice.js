@@ -19,6 +19,14 @@ export const todoSlice = createSlice({
       // push new state object to update initialstate
       initialState.push(newItem);
     },
+
+    // add toggleComplete reducer
+    // state: array of objects, iterate through to find the index of the item we want to update state
+      // each item's state object has a uniq id and we want to find the object element whose id property matches the payload's id
+    toggleComplete: (initialState, action) => {
+      const index = initialState.findIndex(todo => todo.id === action.payload.id);
+      initialState[index].completed = action.payload.completed;
+    },
   },
 });
 
