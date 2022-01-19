@@ -118,8 +118,17 @@ here we will be updating existing state (completed property as defined in the ad
 
 
 ### Updating the item count component
-// 
-// import useSelector and create a function that calculates the total 
-// retrieve the todos list
-// filter out the completed items
-// access the length property
+remember that useSelector subscribes to the Redux stor and run the selector whenver an action is dispatched
+
+<br><hr><br>
+
+## **Working with an API in Redux**
+When an API call is required, dispatched an action that calls a thunk 
+Middleware intercepts these actions and performs the API call
+On response, the middleware accepts the data and dispatches a regular action to the reducer
+- the payload here can be whatever was returned from the API, or it can manipulate/be manipulated by the state change
+
+### fetching from an API
+
+-----------------**update the todo**--------------
+[source material](https://www.freecodecamp.org/news/redux-for-beginners-the-brain-friendly-guide-to-redux/)
